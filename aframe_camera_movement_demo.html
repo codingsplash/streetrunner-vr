@@ -1,0 +1,138 @@
+<html>
+<head>
+
+  <script src="aframe.js"></script>
+  <script src="jquery.js"></script>
+
+</head>
+<body>
+  <a-scene>
+    <a-box position="-5.0 -.2 -5" width="1" height="5" depth="10" material="shader: flat; src: url(house1.jpg)"></a-box>
+    <a-box position="0 0 5"  width="1" height="1" depth="1" color="red"></a-box>
+    <a-box position="-5 0 0"  width="1" height="1" depth="1" color="green"></a-box>
+    <a-box position="5 0 0"  width="1" height="1" depth="1" color="yellow"></a-box>
+    <a-entity geometry="primitive: plane; height: 300; width: 1.5"
+    position="0 -0.5 -150"
+    rotation="-90 0 0"
+    material="shader: flat; src: url(road3.jpg);repeat:1 100">
+
+  </a-entity>
+
+  <a-entity geometry="primitive: plane; height: 300; width: 0.3"
+  position="0.9 -0.5 -150"
+  rotation="-90 0 0"
+  material="shader: flat; src: url(grass.jpg);repeat:0.4 300">
+
+
+</a-entity>
+
+
+<a-entity geometry="primitive: plane; height: 300; width: 0.3"
+position="-0.9 -0.5 -150"
+rotation="-90 0 0"
+material="shader: flat; src: url(grass.jpg);repeat:0.4 300">
+
+
+</a-entity>
+
+  <a-box position="0.8 -.3 -150" width="0.2" height="0.2" depth="300" material="shader: flat; src: url(crib1.jpg); repeat: 300 1"></a-box>
+
+  <a-entity geometry="primitive: plane; height: 300; width: 0.3"
+  position="0.7 -.15 -150"
+  rotation="-90 0 0"
+  material="shader: flat; src: url(crib1.jpg);repeat:1 300">
+
+
+</a-entity>
+<a-box position="-0.8 -.3 -150" width="0.2" height="0.2" depth="300" material="shader: flat; src: url(crib1.jpg); repeat: 300 1"></a-box>
+
+<a-entity geometry="primitive: plane; height: 300; width: 0.3"
+position="-0.7 -.15 -150"
+rotation="-90 0 0"
+material="shader: flat; src: url(crib1.jpg);repeat:1 300">
+
+
+</a-entity>
+
+  <a-sky color="lightblue" id="sky"></a-sky>
+  <a-entity camera look-controls position="0 0.1 0" id="cam">
+    <a-entity position="0 0 -0.1"
+    cursor="fuse: true; fuseTimeout: 500"
+    geometry="primitive: ring; radius-inner: 0.002; radius-outer: 0.003;"
+    material="color: red; shader: flat">
+  </a-entity>
+</a-entity>
+</a-scene>
+
+</body>
+
+<script>
+
+$(function () {
+
+  new_x = 0;
+  new_z = 0;
+  left_edge=false;
+  right_edge=false;
+  function move_camera_forward() {
+    x = $("#cam").attr("position").x;
+    y = $("#cam").attr("position").y;
+    z = $("#cam").attr("position").z;
+    radian = -($("#cam").attr("rotation").y) * (Math.PI / 180);
+
+    new_z = (new_z + (0.1 * Math.cos(radian)));
+    if (!right_edge && !left_edge){
+    new_x = new_x + (0.1 * Math.sin(radian));
+  }
+
+
+    console.log("New x "+new_x)
+    console.log("New x2 "+x)
+    console.log($("#cam").attr("rotation").y)
+    if (new_x<-0.5 ){
+      left_edge=true;
+      right_edge=false;
+    }
+    if (new_x>0.5 ){
+      right_edge=true;
+      left_edge=false;
+    }
+
+    if (right_edge && $("#cam").attr("rotation").y<0){
+      new_x=new_x
+    }
+    else if (left_edge && $("#cam").attr("rotation").y>0)
+    {
+      new_x=new_x
+    }
+    else{
+      new_x = new_x + (0.1 * Math.sin(radian));
+    }
+
+      new_pos = new_x + " " + y + " " + (-new_z);
+
+
+    $("#cam").attr("position", new_pos)
+
+  }
+
+  moving=false
+
+  $("#cam").get(0).addEventListener('componentchanged', function (evt) {
+    if(($("#cam").attr("rotation").x)>15 && !moving){
+      timer1 = setInterval(move_camera_forward, 100);
+      moving=true
+    }
+    if(($("#cam").attr("rotation").x)<-15 && moving){
+      if(timer1!=undefined){
+        clearTimeout(timer1);
+        moving=false
+      }
+    }
+  });
+});
+
+
+</script>
+
+</html>

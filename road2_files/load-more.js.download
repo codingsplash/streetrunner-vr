@@ -1,0 +1,209 @@
+jQuery(function(e){
+
+if (jQuery('#scroll-bar').length > 0 ){
+	jQuery("#scroll-bar").mCustomScrollbar({
+	  scrollButtons:{
+	    enable:true
+	  }
+	});
+}
+
+function t(e){e.addEventListener("click",function(e){e.preventDefault(),this.classList.contains("is-active")===!0?this.classList.remove("is-active"):this.classList.add("is-active")})}function a(e,t,a){"use strict";var o=window.document.createElement("link"),r=t||window.document.getElementsByTagName("script")[0];return o.rel="stylesheet",o.href=e,o.media="only x",r.parentNode.insertBefore(o,r),setTimeout(function(){o.media=a||"all"}),o}function o(e){var t=/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;return t.test(e)}for(var r=document.querySelectorAll(".c-hamburger"),s=r.length-1;s>=0;s--){var n=r[s];t(n)}e(window).width()<801&&(e(".c-hamburger").click(function(){var t=e("nav");return t.hasClass("visible")?t.animate({left:"-800px"},"slow").removeClass("visible"):t.animate({left:"0px"},"slow").addClass("visible"),e(".seach-sec button").hasClass("select")&&e(".seach-sec button").click(),!1}),e(".more-sec").click(function(){return e(".more-sec ul").slideToggle(),e(".more-sec").toggleClass("arrow"),!1})),e(document).click(function(t){return e(".seach-sec button").hasClass("select")?(e(".seach-sec button").click(),!1):e(".c-hamburger").hasClass("is-active")?(e(".c-hamburger").click(),e(".c-hamburger").removeClass("is-active"),!1):void 0}),e(".seach-sec button").click(function(t){return e(".search-box").toggleClass('expanded'),e(".seach-sec button").toggleClass("select"),e('input[type="text"]').focus(),!1}),e("#primary-menu a").click(function(){var t=e(this).attr("href");location=t}),e('input[type="text"]').click(function(){return!1}),e(".more-load").append('<div class="load-more-btn" ><button>Load More</button></div>');var c=(e(".more-load .load-more-btn"),2),i=!1,l=!1,m=e("#hiddenCategory").val();e("body").on("click",".load-more-btn",function(){if(e(".more-load").append('<div class="load-more-wait" ><img src="https://www.freecreatives.com/wp-content/themes/fastest-theme/images/loading.gif"></div>'),e(".load-more-btn").hide(),!i){i=!0;var t={action:"be_ajax_load_more",nonce:beloadmore.nonce,page:c,query:beloadmore.query,category:m};e.post(beloadmore.url,t,function(t){t.success?(e(".load-more-wait").remove(),l=!0,e(".more-load").append(t.data),c+=1,i=!1):console.log(t)}).fail(function(e,t,a){})}}),e(window).scroll(function(){var t=e(window).scrollTop();if(!i&&l&&t>=.5*(e(document).height()-e(window).height())){i=!0,e(".more-load").append('<div class="load-more-wait" ><img src="https://www.freecreatives.com/wp-content/themes/fastest-theme/images/loading.gif"></div>');var a={action:"be_ajax_load_more",nonce:beloadmore.nonce,page:c,query:beloadmore.query,category:m};e.post(beloadmore.url,a,function(t){e(".load-more-wait").remove(),t.success&&(e(".more-load").append(t.data),c+=1,i=!1)}).fail(function(e,t,a){})}}),e(".cat_content_readmore").click(function(){e("html, body").animate({scrollTop:e(".archive-description-bottom").offset().top},"slow")}),e("#inner_top").click(function(){e("html, body").animate({scrollTop:e(".single-post").offset().top-100},"slow")}),a("https://www.freecreatives.com/wp-content/themes/fastest-theme/style.css"),e("#contact_submit").click(function(t){var a=e("#person_name").val(),r=e("#email_id").val(),s=e("#subject").val(),n=e("#description").val();t.preventDefault(),a=a.trim(),r=r.trim(),s=s.trim(),n=n.trim();var c=!0,i=grecaptcha.getResponse();return e(".input__label-content").removeClass("errormsg"),""==a?(c=!1,e(".name_err").addClass("errormsg"),!1):""==r?(c=!1,e(".email_err").addClass("errormsg"),!1):""==r||o(r)?(e(".email_err").removeClass("errormsg"),e(".email_err").html("Email*"),""==s?(c=!1,e(".sub_err").addClass("errormsg"),!1):""==n?(c=!1,e(".des_err").addClass("errormsg"),!1):0==i.length?(c=!1,e(".captcha_err").html("You can not leave Captcha Code empty."),!1):void(c&&e.ajax({type:"POST",url:"./wp-content/themes/fastest-theme/ajx_get_captcha_res.php",data:e("#contact_application").serialize(),success:function(t){return grecaptcha.reset(),t=t.trim(),"success"==t?(e("#contact_application").hide(),e(".success_message").show(),!1):void 0}}))):(c=!1,e(".email_err").addClass("errormsg"),e(".email_err").html("<font style='color:red;'>Please Enter valid Email</font>"),!1)})}),jQuery("#404search").keydown(function(e){var t=e.keyCode||e.which;13==t&&setTimeout(function(){var e=jQuery("#404search").val(),t=jQuery("#siteurl").val();return window.location.href=t+"/?s="+e,!1},100)}),jQuery(".bgsearch button").click(function(){var e=jQuery("#404search").val(),t=jQuery("#siteurl").val();window.location.href=t+"/?s="+e});
+//jQuery('#free_media_bottom').parent('div').css('width','100%');
+
+jQuery(window).scroll( function(){ 
+	var scrltop = jQuery(window).scrollTop();
+	if (scrltop >= 600) {
+        jQuery(".fix-btn-sec").addClass("left-btns-fixed");
+    } 
+    else {
+       jQuery(".fix-btn-sec").removeClass("left-btns-fixed");
+    }
+    if (jQuery('.post-container').length > 0 && scrltop + 200 >= jQuery(".post-container").offset().top){ 
+        jQuery(".fix-btn-sec").removeClass("left-btns-fixed");
+    }
+    if (scrltop > 1200)
+    {
+      jQuery(".scroll-button").show();
+    }
+    else
+    {
+      jQuery(".scroll-button").hide();
+    }
+});
+
+
+
+jQuery(".bb_toc ul li a").click(function(){
+      var x = jQuery(this).attr('spos');
+      jQuery("html, body").animate({scrollTop:jQuery("#"+x).offset().top - 80},"slow");
+    });
+    jQuery(".fix-btn-sec .share-btn").click(function(){
+        var popup = '<div class="mask-popup-section">';
+          popup+='<div class="popup-img-box">';
+          popup+='</div>';
+          popup+='</div>';
+          jQuery('body').append(popup);
+          jQuery(".popup-close-btn").click(function(){ jQuery('.mask-popup-section').remove(); jQuery(".share-icons-box").slideToggle(); });
+          jQuery(".popup-img-box").click(function(){ jQuery('.mask-popup-section').remove(); jQuery(".share-icons-box").slideToggle();});
+          jQuery(".share-icons-box").slideToggle();
+    });
+
+    jQuery(".format3-menu").click(function(){
+        jQuery("#site-navigation").toggle();
+        jQuery(this).toggleClass('format3-active');
+    });
+
+ jQuery(".watapp").click(function(){
+    var text = jQuery(this).attr("data-text");
+    var url = jQuery(this).attr("data-link");
+    var message = encodeURIComponent(text) + " - " + encodeURIComponent(url);
+    var whatsapp_url = "whatsapp://send?text=" + message;
+    window.location.href = whatsapp_url;
+ });
+
+jQuery("#inner_top,.scroll-button").click(function(){
+ jQuery('html, body').animate({ scrollTop:jQuery('.single-post').offset().top-100 }, 'slow');
+});
+// Specify the OptinMonster Event that will close our optin
+jQuery(".mobile-share-btn").click(function(){
+        var popup = '<div class="mask-popup-section">';
+          popup+='<div class="popup-img-box">';
+          popup+='</div>';
+          popup+='</div>';
+          jQuery('body').append(popup);
+          jQuery(".popup-img-box").click(function(){ jQuery('.mask-popup-section').remove(); jQuery(".share-bottom-box").slideToggle();});
+          jQuery(".img-box img").click(function(){ return false; });
+          jQuery(".share-bottom-box").slideToggle();
+    });
+	jQuery(".bb_custom_paypal_checkout").click(function(){
+		var id = jQuery(this).attr('data-download-id');
+ 	  jQuery('body').append('<div class="custom-popuup-paypal-wait"><div class="paypal-wait-msg-class"><svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="https://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br /><div class="wait-text">Please Wait, While we are redirecting you to payment gateway...</div></div><iframe id="respdiv"></iframe></div>');
+
+  });
+
+jQuery(".btn-freedownload").click(function(e){
+  var x = jQuery(this).attr("fid");
+  jQuery("#"+x).toggle('slow');
+  jQuery(this).hide();
+});
+
+jQuery('.form_email').keydown(function (e) {
+  var code = e.keyCode || e.which;
+ if(code == 13) { //Enter keycode
+    e.preventDefault();
+ }
+});
+
+	jQuery('.btn-maildownload').on('click', function() {
+		var x = jQuery(this).attr("fid");
+		 var email = jQuery("#"+x+" #email").val();
+                if (jQuery.trim(email) =='' || !validateEmail(email))
+                {
+                  jQuery("#"+x+" #email").css('border','1px solid red');
+                }
+                else if (validateEmail(email))
+                {
+		jQuery("#"+x+" #email").css('border','1px solid #cccccc');
+		 jQuery("#"+x).hide();
+ 		jQuery("#"+x).next('div.edd-free-dl').append('<div class="edd-resp">We have sent you the Download link.</div>');
+//		 jQuery('.btn-freedownload').show();
+		 var action = "submit-form-freedownload";
+		 var url = jQuery("#"+x+" #url").val();
+		 var name = jQuery("#"+x+" #name").val();
+		 var amount = jQuery("#"+x+" #amount").val();
+		 var currency = jQuery("#"+x+" #currency").val();
+		 var language = jQuery("#"+x+" #language").val();
+		 var dataString = '&action='+ action  +'&name=' + name + '&amount=' + amount +'&currency=' + currency + '&language=' +language;
+		 jQuery.ajax({
+			type: "POST",
+			url: url,
+			data: jQuery("#"+x).serialize() + dataString,
+			success: function(response) {
+//				alert("Download has been sent to your mail id");
+				}
+			});
+		}
+	});
+
+var t_prlx_scrol = 0;
+var t_prlx_prev_scrol = 0;
+var delta = 100;
+
+jQuery(window).scroll(function(e){
+if(jQuery(window).width() > 800 && jQuery('.free-temp-image').length > 0 )
+  {
+    parallax();
+  }
+});
+
+function parallax(){
+  var scrolled = jQuery(window).scrollTop();
+  var divnum = 0;
+  if (t_prlx_prev_scrol + delta < scrolled)
+  {
+    t_prlx_prev_scrol = scrolled;
+    return false;
+  }
+
+  jQuery('.free-temp-image').each(function(){
+      jQuery(this).addClass('cus_parlox'+divnum);
+      divnum++;
+  });
+  if (scrolled > t_prlx_prev_scrol)
+  {
+    t_prlx_prev_scrol = scrolled;
+    var numItems = jQuery('.cus_parlox'+t_prlx_scrol).length;
+    if (numItems > 0)
+    {
+      var x = jQuery('.cus_parlox'+t_prlx_scrol).offset().top;
+      var div_bottom_pos = x + jQuery('.cus_parlox'+t_prlx_scrol).outerHeight();
+      var scrolled_prlx = scrolled-x+46;
+      var cond = jQuery('.cus_parlox'+t_prlx_scrol+' .free-temp-details').offset().top + jQuery('.cus_parlox'+t_prlx_scrol+' .free-temp-details').outerHeight() + 46;
+      if (scrolled > x && cond < div_bottom_pos)
+      {
+        jQuery('.cus_parlox'+t_prlx_scrol+' .free-temp-details').css('top',+(scrolled_prlx)+'px');
+      }
+      var next_t_prlx_scrol = t_prlx_scrol+1; 
+      if (jQuery('.cus_parlox'+next_t_prlx_scrol).length > 0)
+      {
+        var y = jQuery('.cus_parlox'+next_t_prlx_scrol).offset().top;
+        if (y < scrolled && t_prlx_scrol < divnum)
+        { 
+          t_prlx_scrol++;
+        }
+      }
+    }
+  }
+  else
+  {
+    t_prlx_prev_scrol = scrolled;
+    var numItems = jQuery('.cus_parlox'+t_prlx_scrol).length;
+    if (numItems > 0)
+    {
+      var x = jQuery('.cus_parlox'+t_prlx_scrol).offset().top;
+      var div_bottom_pos =  jQuery('.cus_parlox'+t_prlx_scrol).outerHeight();
+      var scrolled_prlx = scrolled-x + 46;
+      var scrol_sec = scrolled_prlx + jQuery('.cus_parlox'+t_prlx_scrol+' .free-temp-details').outerHeight() + 46;
+      if (scrolled > x && scrol_sec < div_bottom_pos)
+      {
+        jQuery('.cus_parlox'+t_prlx_scrol+' .free-temp-details').css('top',+(scrolled_prlx)+'px');
+      }
+     
+      var next_t_prlx_scrol = t_prlx_scrol-1; 
+      if (jQuery('.cus_parlox'+next_t_prlx_scrol).length > 0)
+      {
+        var y = jQuery('.cus_parlox'+next_t_prlx_scrol).offset().top + jQuery(window).height() + 50;
+        if (y > scrolled && t_prlx_scrol > 0)
+        { 
+          t_prlx_scrol--;
+        }
+      }
+    }
+  }
+}
+
+  function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+  }
