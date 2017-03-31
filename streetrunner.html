@@ -7,10 +7,7 @@
 </head>
 <body>
   <a-scene>
-    <a-box position="-5.0 -.2 -5" width="1" height="5" depth="10" material="shader: flat; src: url(house1.jpg)"></a-box>
-    <a-box position="0 0 5"  width="1" height="1" depth="1" color="red"></a-box>
-    <a-box position="-5 0 0"  width="1" height="1" depth="1" color="green"></a-box>
-    <a-box position="5 0 0"  width="1" height="1" depth="1" color="yellow"></a-box>
+
     <a-entity geometry="primitive: plane; height: 300; width: 1.5"
     position="0 -0.5 -150"
     rotation="-90 0 0"
@@ -125,8 +122,8 @@ $(function () {
     }
     if(($("#cam").attr("rotation").x)<-15 && moving){
       if(timer1!=undefined){
-        clearTimeout(timer1);
-        moving=false
+        //clearTimeout(timer1);
+        //moving=false
       }
     }
   });
